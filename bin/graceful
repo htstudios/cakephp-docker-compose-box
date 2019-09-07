@@ -1,0 +1,10 @@
+#!/bin/bash
+####################################################################################
+# @author  Jonas Hartmann <mail@inoas.com>
+# @license For full copyright and license information, please see the LICENSE.txt.
+# @since   1.0.0
+####################################################################################
+project=$(pwd);
+cd "$(dirname "$0")" && cd .. \
+    && docker-compose --project-name "$project" restart "$@" \
+;

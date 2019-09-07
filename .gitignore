@@ -1,0 +1,51 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Tool specific files #
+#######################
+# vim
+*~
+*.swp
+*.swo
+# sublime text & textmate
+*.sublime-*
+*.stTheme.cache
+*.tmlanguage.cache
+*.tmPreferences.cache
+# Eclipse
+.settings/*
+# JetBrains, aka PHPStorm, IntelliJ IDEA
+.idea/*
+# NetBeans
+nbproject/*
+# Visual Studio Code
+.vscode
+.code-workspace
+# Sass preprocessor
+.sass-cache/
+# Node Modules
+node_modules/*
+!node_modules/.keep
+
+# App specific files #
+######################
+application/http/*
+!application/http/webroot
+application/http/webroot/*
+!application/http/webroot/phpinfo.php
+application/data/*
+!application/data/.keep
+application/data/mariadb*
+!application/data/mariadb/.keep
+application/tmp/*
+!application/tmp/.keep
+logs/*
+!logs/.keep

@@ -1,0 +1,17 @@
+#!/bin/bash
+####################################################################################
+# @author  Jonas Hartmann <mail@inoas.com>
+# @license For full copyright and license information, please see the LICENSE.txt.
+# @since   1.0.0
+####################################################################################
+project=$(pwd);
+cd "$(dirname "$0")" \
+    && echo "• Clearing application/http directory..." \
+    && mv ../application/http/webroot/phpinfo.php ../application/tmp/phpinfo.php \
+    && cd ../application/http && find . -delete \
+    && echo "• Installing CakePHP..." \
+    && cd ../.. && bin/composer create-project --prefer-dist --no-interaction cakephp/app application/http "$@" \
+    && mv ./application/tmp/phpinfo.php ./application/http/webroot/phpinfo.php \
+    && echo "• Starting Docker server..." \
+    && bin/boot \
+;

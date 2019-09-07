@@ -1,0 +1,4 @@
+#!/bin/bash
+cd "$(dirname "$0")" && cd .. \
+    && sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout private/localhost-dummy.key -out certs/localhost-dummy.crt -config localhost-dummy.conf \
+;
