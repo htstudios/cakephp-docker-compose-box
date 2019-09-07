@@ -6,15 +6,25 @@
 ####################################################################################
 project=$(pwd);
 cd "$(dirname "$0")" \
-    && echo "• Clearing application/http directory..." \
-    && cd ../application/http && find . -delete \
-    && echo "• Installing CakePHP app akeleton..." \
-    && cd ../.. && bin/composer create-project --prefer-dist --no-interaction cakephp/app application/http "$@" \
+    && echo "• Force removing application/http directory..." \
+    && rm -rf ../application/http \
+    && mkdir ../application/http \
+    && cd ../application/http \
+    && echo "• Installing CakePHP app skeleton..." \
+    && cd ../../ && bin/composer create-project --prefer-dist --no-interaction cakephp/app application/http "$@" \
     && cp ./application/setup/http/webroot/phpinfo.php ./application/http/webroot/phpinfo.php \
     && cp ./application/setup/docker-cake.code-workspace ./application/docker-cake.code-workspace \
     && echo "• Starting Docker server..." \
     && bin/boot \
-    && echo "• Opening Visual Studio Code project..." \
 	&& cd ./application \
+    && echo "• Initializing git repo..." \
+	&& git init \
+	&& git add . \
+	&& git commit -m 'initial commit' \
+    && echo "• Opening Visual Studio Code project..." \
 	&& open docker-cake.code-workspace \
+    && echo "• Opening phpinfo() in browser..." \
+	&& open 'https://docker-cake.local:3001/phpinfo.php' \
+    && echo "• Opening CakePHP in browser..." \
+	&& open 'https://docker-cake.local:3001' \
 ;
