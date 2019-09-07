@@ -6,11 +6,14 @@ volumes:
   postgres-data-cake:
     driver: local
 
+networks:
+  network-cake:
+
 services:
   memcached-cake:
-    #networks:
-    #  - network-cake
-    #container_name: memcached-cake
+    networks:
+      - network-cake
+    container_name: memcached-cake
     image: "memcached:alpine"
     env_file:
       - "./config/memcached.env"
@@ -23,9 +26,9 @@ services:
     restart: always
 
   redis-cake:
-    #networks:
-    #  - network-cake
-    #container_name: redis-cake
+    networks:
+      - network-cake
+    container_name: redis-cake
     image: "redis:alpine"
     volumes:
       - redis-cake
@@ -41,9 +44,9 @@ services:
     restart: always
 
   cli-cake:
-    #networks:
-    #  - network-cake
-    #container_name: cli-cake
+    networks:
+      - network-cake
+    container_name: cli-cake
     image: cli
     build: config/docker/cli
     depends_on:
@@ -64,9 +67,9 @@ services:
     command: tail -f /dev/null
 
   php-fpm-cake:
-    #networks:
-    #  - network-cake
-    #container_name: php-fpm-cake
+    networks:
+      - network-cake
+    container_name: php-fpm-cake
     build: config/docker/php-fpm
     depends_on:
       - memcached-cake
@@ -91,9 +94,9 @@ services:
       - "9000"
 
   nginx-cake:
-    #networks:
-    #  - network-cake
-    #container_name: nginx-cake
+    networks:
+      - network-cake
+    container_name: nginx-cake
     image: nginx
     links:
       - php-fpm-cake
@@ -120,7 +123,9 @@ services:
       - "./logs/nginx:/var/log/nginx:delegated"
 
   mariadb-cake:
-    #container_name: mariadb-cake
+    networks:
+      - network-cake
+    container_name: mariadb-cake
     image: "mariadb:10.3"
     ports:
       - "3003:3306"
@@ -132,9 +137,9 @@ services:
     command: "mysqld --log-bin-trust-function-creators=1 --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON --character-set-server=utf8mb4 --collation-server=utf8mb4_bin"
 
   postgres:
-    #networks:
-    #  - network-cake
-    #container_name: postgres-cake
+    networks:
+      - network-cake
+    container_name: postgres-cake
     image: postgres
     working_dir: "/application/data/postgres"
     volumes:
@@ -154,9 +159,9 @@ services:
       - REPLICATION_SSLMODE=
 
   mailhog-cake:
-    #networks:
-    #  - network-cake
-    #container_name: mailhog-cake
+    networks:
+      - network-cake
+    container_name: mailhog-cake
     image: "mailhog/mailhog:latest"
     expose:
       - "1026"

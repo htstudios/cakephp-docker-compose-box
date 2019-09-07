@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.10
 WORKDIR "/application/http"
 
 # Fix debconf warnings upon build
@@ -39,7 +39,7 @@ RUN apk add --update --upgrade --no-cache \
         php7-session \
         php7-simplexml \
         php7-tokenizer \
-        php7-pecl-xdebug \
+        #php7-pecl-xdebug \
         php7-xdebug \
         php7-xml \
         php7-xmlreader \
@@ -48,9 +48,9 @@ RUN apk add --update --upgrade --no-cache \
         php7-zlib
 
 # Install xdebug
-RUN apk add --update --upgrade --no-cache php7-dev alpine-sdk
-RUN apk add --update --upgrade --no-cache --virtual .phpize-deps $PHPIZE_DEPS
-RUN pecl channel-update pecl.php.net && pecl -v install xdebug
+#RUN apk add --update --upgrade --no-cache php7-dev alpine-sdk
+#RUN apk add --update --upgrade --no-cache --virtual .phpize-deps $PHPIZE_DEPS
+#RUN pecl channel-update pecl.php.net && pecl -v install xdebug
 
 # Clean cache
 RUN rm -rf /var/cache/apk/*

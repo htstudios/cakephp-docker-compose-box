@@ -6,7 +6,7 @@
 ####################################################################################
 project=$(pwd);
 cd "$(dirname "$0")" \
-    && echo "• Starting Docker for Mac engine..." \
+    && echo "• Starting Docker for Mac engine, if it is not running..." \
     && open /Applications/Docker.app \
     && echo "• Force removing application/http directory..." \
     && rm -rf ../application/http \
@@ -18,7 +18,7 @@ cd "$(dirname "$0")" \
     && cp ./application/setup/http/myapp.code-workspace ./application/http/myapp.code-workspace \
     && cp ./application/setup/http/config/.env ./application/http/config/.env \
     && cp ./application/setup/http/config/app_local.php ./application/http/config/app_local.php \
-    && echo "• Running Docker Composer..." \
+    && echo "• Running Docker Compose..." \
     && bin/up \
     && cd ./application/http \
     && echo "• Setting up CakePHP environment..." \
