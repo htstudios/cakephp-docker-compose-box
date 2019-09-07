@@ -33,7 +33,9 @@ cd "$(dirname "$0")" \
     && cd ./application/http \
     && echo "• Setting up CakePHP environment..." \
     && echo "$bootstrapphp" >> ./config/bootstrap.php \
-    && echo 'phpinfo.php' >> ./.gitignore \
+    && echo '/config/.env' >> ./.gitignore \
+    && echo '/config/app_local.php' >> ./.gitignore \
+    && echo '/phpinfo.php' >> ./.gitignore \
     && echo "• Initializing git repo..." \
     && git init \
     && git add . \

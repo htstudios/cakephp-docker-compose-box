@@ -44,7 +44,7 @@ return [
     'Datasources' => [
         'default' => [
             'host' => 'mariadb-cake',
-            'log' => false,
+            'log' => true,
         ],
     ],
 
