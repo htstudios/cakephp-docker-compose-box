@@ -3,6 +3,7 @@
 ## Requirements
 
 - Only tested on macOs 10.14+.
+- Only tested for CakePHP 3.x so far.
 - Requires php, composer etc. installed via brew
 - Requires Docker for Mac, Visual Studio Code for Mac
 

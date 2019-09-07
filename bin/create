@@ -5,7 +5,18 @@
 # @since   1.0.0
 ####################################################################################
 project=$(pwd);
+bootstrapphp="
+if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
+    \$dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
+    \$dotenv->parse()
+        ->putenv()
+        ->toEnv()
+        ->toServer();
+}
+";
 cd "$(dirname "$0")" \
+    && echo "• Starting Docker for Mac engine..." \
+	&& open /Applications/Docker.app \
     && echo "• Force removing application/http directory..." \
     && rm -rf ../application/http \
     && mkdir ../application/http \
@@ -14,9 +25,12 @@ cd "$(dirname "$0")" \
     && cd ../../ && bin/composer create-project --prefer-dist --no-interaction cakephp/app application/http "$@" \
     && cp ./application/setup/http/webroot/phpinfo.php ./application/http/webroot/phpinfo.php \
     && cp ./application/setup/docker-cake.code-workspace ./application/docker-cake.code-workspace \
-    && echo "• Starting Docker server..." \
-    && bin/boot \
+    && echo "• Running Docker Composer..." \
+    && bin/up \
 	&& cd ./application \
+	&& echo "• Setting up CakePHP environment..." \
+	&& echo "$boostrapphp" >> ./http/config/bootstrap.php \
+	&& echo 'phpinfo.php' >> .gitignore \
     && echo "• Initializing git repo..." \
 	&& git init \
 	&& git add . \
