@@ -27,10 +27,10 @@ cd "$(dirname "$0")" \
     && cp ./application/setup/docker-cake.code-workspace ./application/docker-cake.code-workspace \
     && echo "• Running Docker Composer..." \
     && bin/up \
-	&& cd ./application \
+	&& cd ./application/http \
 	&& echo "• Setting up CakePHP environment..." \
-	&& echo "$boostrapphp" >> ./http/config/bootstrap.php \
-	&& echo 'phpinfo.php' >> .gitignore \
+	&& echo "$boostrapphp" >> ./config/bootstrap.php \
+	&& echo 'phpinfo.php' >> ./.gitignore \
     && echo "• Initializing git repo..." \
 	&& git init \
 	&& git add . \
