@@ -13,10 +13,11 @@ if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
         ->toEnv()
         ->toServer();
 }
+Configure::load('app_local', 'default');
 ";
 cd "$(dirname "$0")" \
     && echo "• Starting Docker for Mac engine..." \
-	&& open /Applications/Docker.app \
+    && open /Applications/Docker.app \
     && echo "• Force removing application/http directory..." \
     && rm -rf ../application/http \
     && mkdir ../application/http \
@@ -24,21 +25,24 @@ cd "$(dirname "$0")" \
     && echo "• Installing CakePHP app skeleton..." \
     && cd ../../ && bin/composer create-project --prefer-dist --no-interaction cakephp/app application/http "$@" \
     && cp ./application/setup/http/webroot/phpinfo.php ./application/http/webroot/phpinfo.php \
-    && cp ./application/setup/docker-cake.code-workspace ./application/docker-cake.code-workspace \
+    && cp ./application/setup/http/myapp.code-workspace ./application/http/myapp.code-workspace \
+    && cp ./application/setup/http/config/.env ./application/http/config/.env \
+    && cp ./application/setup/http/config/app_local.php ./application/http/config/app_local.php \
     && echo "• Running Docker Composer..." \
     && bin/up \
-	&& cd ./application/http \
-	&& echo "• Setting up CakePHP environment..." \
-	&& echo "$boostrapphp" >> ./config/bootstrap.php \
-	&& echo 'phpinfo.php' >> ./.gitignore \
+    && cd ./application/http \
+    && echo "• Setting up CakePHP environment..." \
+    && echo "$bootstrapphp" >> ./config/bootstrap.php \
+    && echo 'phpinfo.php' >> ./.gitignore \
     && echo "• Initializing git repo..." \
-	&& git init \
-	&& git add . \
-	&& git commit -m 'initial commit' \
+    && git init \
+    && git add . \
+    && git commit -m 'initial commit' \
     && echo "• Opening Visual Studio Code project..." \
-	&& open docker-cake.code-workspace \
+    && pwd \
+    && open ./myapp.code-workspace \
     && echo "• Opening phpinfo() in browser..." \
-	&& open 'https://docker-cake.local:3001/phpinfo.php' \
+    && open 'https://docker-cake.local:3001/phpinfo.php' \
     && echo "• Opening CakePHP in browser..." \
-	&& open 'https://docker-cake.local:3001' \
+    && open 'https://docker-cake.local:3001' \
 ;
