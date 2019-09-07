@@ -6,5 +6,5 @@
 ####################################################################################
 project=$(pwd);
 cd "$(dirname "$0")" && cd .. \
-    && docker --project-name "$project" exec -it cli-cake bash \
+    && docker-compose --project-name "$project" exec cli-cake bash \
 ;
