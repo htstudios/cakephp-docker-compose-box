@@ -1,4 +1,4 @@
-# CakePHP Docker Compose Template
+# CakePHP Docker Compose Box
 
 ## Requirements
 
