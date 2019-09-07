@@ -6,6 +6,9 @@
 ####################################################################################
 project=$(pwd);
 cd "$(dirname "$0")" && cd .. \
+    && echo "• Starting Docker for Mac engine..." \
+    && open /Applications/Docker.app \
+    && echo "• Running Docker Composer..." \
     && docker-compose --project-name "$project" down \
     && docker-compose --project-name "$project" up --build --remove-orphans --detach "$@" \
 ;

@@ -5,16 +5,6 @@
 # @since   1.0.0
 ####################################################################################
 project=$(pwd);
-bootstrapphp="
-if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
-    \$dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
-    \$dotenv->parse()
-        ->putenv()
-        ->toEnv()
-        ->toServer();
-}
-Configure::load('app_local', 'default');
-";
 cd "$(dirname "$0")" \
     && echo "• Starting Docker for Mac engine..." \
     && open /Applications/Docker.app \
@@ -32,7 +22,6 @@ cd "$(dirname "$0")" \
     && bin/up \
     && cd ./application/http \
     && echo "• Setting up CakePHP environment..." \
-    && echo "$bootstrapphp" >> ./config/bootstrap.php \
     && echo '/config/.env' >> ./.gitignore \
     && echo '/config/app_local.php' >> ./.gitignore \
     && echo '/phpinfo.php' >> ./.gitignore \

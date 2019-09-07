@@ -13,7 +13,7 @@ Running bin/create again will wipe your project. Use an external git repo to mak
 
 1. Clone Repo
 2. From this repos root run `$ bin/create` to create the initial cakephp project
-3. From this repos root run `$ bin/up` to boot the box
-4. From this repos root run `$ bin/down` to shutdown the box
-5. From this repos root Run `$ bin/cli` then inside the docker cli `$ bin/cake` to operate with the cake console inside the docker box
-6. ...
+3. Enable .env and app_local.php support in application/http/config/bootstrap.php
+4. From this repos root run `$ bin/up` to boot the box
+5. From this repos root run `$ bin/down` to shutdown the box
+6. From this repos root Run `$ bin/cli` then inside the docker cli `$ bin/cake` to operate with the cake console inside the docker box
