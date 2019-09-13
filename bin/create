@@ -6,7 +6,7 @@
 ####################################################################################
 project=$(pwd);
 cd "$(dirname "$0")" \
-    && echo "• Starting Docker for Mac engine, if it is not running..." \
+    && echo "• Starting Docker Desktop Mac, if it is not running..." \
     && open /Applications/Docker.app \
     && echo "• Force removing application/http directory..." \
     && rm -rf ../application/http \
@@ -34,6 +34,8 @@ cd "$(dirname "$0")" \
     && open ./myapp.code-workspace \
     && echo "• Opening phpinfo() in browser..." \
     && open 'https://docker-cake.local:3001/phpinfo.php' \
+    && echo "• Opening MailHog in browser..." \
+    && open 'http://docker-cake.local:8026' \
     && echo "• Opening CakePHP in browser..." \
     && open 'https://docker-cake.local:3001' \
 ;
